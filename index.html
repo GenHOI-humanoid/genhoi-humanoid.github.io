@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="GenHOI enables humanoid robots to perform diverse object-interaction tasks by imitating a single generated video, without task-specific training or physical demonstration data.">
+  <meta name="keywords" content="GenHOI, Humanoid-Object Interaction, Video Generation, Loco-Manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GenHOI: Contact-Aware Humanoid-Object Interaction by Imitating Generated Videos without Task-Specific Training</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/dog.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-fullhd">
+      <div class="hero-title-wrapper">
+          <h1 class="title publication-title">
+            <span class="title-line">GenHOI: Contact-Aware Humanoid-Object Interaction</span>
+            <span class="title-line">by Imitating Generated Videos without Task-Specific Training</span>
+          </h1>
+      </div>
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Authors
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Inserted Image -->
+
+<figure class="content is-centered is-full-width has-text-centered">
+  <img src="./static/images/cover.jpg" width="50%" alt="GenHOI Overview">
+  <figcaption style="margin-top: 10px; font-size: 1.0rem; color: #333; max-width: 50%; margin-left: auto; margin-right: auto; text-align: center;">
+    Overview of the proposed GenHOI framework.
+    <strong>(A) Real-to-Sim Video Generation:</strong>
+    GenHOI reconstructs the robot-observed scene in simulation and generates a reference video from the rendered image and text instructions.
+    <strong>(B) Contact-aware Geometric Constraint Extraction:</strong>
+    Key-frame selection, metric depth recovery, hand segmentation, and contact point detection convert visual interaction cues into physically grounded priors.
+    <strong>(C) Geometry-Guided Trajectory Optimization:</strong>
+    These constraints refine the recovered reference motion into a physically feasible hand-object interaction trajectory.
+    <strong>(D) Closed-Loop Trajectory Tracking:</strong>
+    The optimized trajectory is executed through closed-loop tracking in both simulation and real-world experiments.
+  </figcaption>
+</figure>
+  
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Humanoid-Object Interaction (HOI) is a fundamental capability for humanoid robots, yet it remains challenging due to the tight coupling between dynamic balance and stable interaction with diverse objects.
+            Existing methods often require time-consuming task-specific policy training or rely on rigid trajectory replay, which limits their ability to accommodate novel interaction scenarios.
+            In this work, we present GenHOI, a simple yet effective framework that enables humanoid robots to perform diverse object-interaction tasks in a zero-shot manner by directly imitating a single generated video, without task-specific training or physical demonstration data. 
+            GenHOI first reconstructs the robot-object scene in simulation and renders a first-frame image, which, together with the language command, conditions the synthesis of a task-oriented interaction video.
+            The generated video is then analyzed to identify interaction-relevant contact events and estimate hand-object contact regions, which are encoded as object-centric geometric constraints that convert visual interaction cues into physically grounded optimization priors. 
+            Guided by these priors, the reference motion recovered from the video is refined and smoothed to resolve the scale ambiguity inherent in 2D video generation, while adapting a single reference trajectory to unseen robot-object relative poses. 
+            The optimized trajectory is finally executed by a closed-loop tracking controller.
+            We validate the proposed framework in extensive simulation and real-world experiments across diverse object-interaction tasks, including box grasping, asymmetric bimanual chair carrying, table lifting from below, and cylindrical-object enveloping. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-fullhd">
+    <h2 class="title is-3">Experiments</h2>
+
+    <!-- Simulation -->
+    <h3 class="title is-4">Simulation</h3>
+    <div class="content has-text-justified">
+      <p>
+        Qualitative comparison of five methods across four object categories in simulation.
+        Each row corresponds to a different baseline or ablation, and each column shows results on a different object.
+        All objects are initialized 2.0 m away from the robot.
+      </p>
+    </div>
+
+    <div class="simulation-grid-container">
+    <div class="columns is-vcentered is-hidden-mobile simulation-grid-header">
+      <div class="column is-2"></div>
+      <div class="column">
+        <p class="video-grid-header">Chair</p>
+      </div>
+      <div class="column">
+        <p class="video-grid-header">Table</p>
+      </div>
+      <div class="column">
+        <p class="video-grid-header">Box</p>
+      </div>
+      <div class="column">
+        <p class="video-grid-header">Cylinder</p>
+      </div>
+    </div>
+
+    <div class="columns is-vcentered simulation-grid-row">
+      <div class="column is-12-mobile is-2-tablet">
+        <p class="video-grid-row-label">ExoActor</p>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Chair</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/chair_2.0_ExoActor.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Table</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/table_2.0_ExoActor.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Box</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/box_2.0_ExoActor_2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Cylinder</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/cylinder_2.0_ExoActor_2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-vcentered simulation-grid-row">
+      <div class="column is-12-mobile is-2-tablet">
+        <p class="video-grid-row-label">W/o Cont. Det.</p>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Chair</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/chair_2.0_ablation.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Table</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/table_2.0_ablation.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Box</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/box_2.0_ablation_2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Cylinder</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/cylinder_2.0_ablation.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-vcentered simulation-grid-row">
+      <div class="column is-12-mobile is-2-tablet">
+        <p class="video-grid-row-label">W/o Inward Bias</p>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Chair</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/chair_2.0_wo_bias.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Table</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/table_2.0_wo_bias.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Box</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/box_2.0_wo_bias.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Cylinder</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/cyliner_2.0_wo_bias.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-vcentered simulation-grid-row">
+      <div class="column is-12-mobile is-2-tablet">
+        <p class="video-grid-row-label">W/o Traj. Smooth.</p>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Chair</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/chair_2.0_wo_smooth.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Table</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/table_2.0_wo_smooth.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Box</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/box_2.0_wo_smooth.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Cylinder</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/cylinder_2.0_wo_smooth.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-vcentered simulation-grid-row">
+      <div class="column is-12-mobile is-2-tablet">
+        <p class="video-grid-row-label">Ours</p>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Chair</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/chair_2.0_ours.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Table</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/table_2.0_ours.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Box</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/box_2.0_ours_2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-6-mobile">
+        <p class="video-grid-header is-hidden-tablet">Cylinder</p>
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/cylinder_2.0_ours.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Real-World -->
+    <h3 class="title is-4" style="margin-top: 3rem;">Real-World Experiments</h3>
+    <div class="content has-text-justified">
+      <p>
+        Real-world experiments on the Unitree G1 humanoid robot, including interaction with diverse objects,
+        generalization to out-of-distribution object positions, and representative failure cases.
+      </p>
+    </div>
+
+    <h4 class="title is-5" style="margin-top: 1.5rem;">Interaction with Different Objects</h4>
+    <div class="content has-text-justified">
+      <p>
+        Demonstrations of box grasping, asymmetric bimanual chair carrying, table lifting from below,
+        and cylindrical-object enveloping.
+      </p>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/box_grasping.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Box Grasping</p>
+      </div>
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/chair_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Asymmetric Bimanual Chair Carrying</p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/table_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Table Lifting from Below</p>
+      </div>
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/cylinder_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Cylindrical-Object Enveloping</p>
+      </div>
+    </div>
+
+    <h4 class="title is-5" style="margin-top: 2rem;">OOD Object Positions</h4>
+    <div class="content has-text-justified">
+      <p>
+        Continuous box grasping at varying object positions using a single reference trajectory,
+        demonstrating generalization to out-of-distribution robot-object relative poses.
+      </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/continuous_box.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Continuous Box Grasping under OOD Positions</p>
+      </div>
+    </div>
+
+    <h4 class="title is-5" style="margin-top: 2rem;">Failure Cases</h4>
+    <div class="content has-text-justified">
+      <p>
+        Representative failure cases
+      </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/box_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Hand Contact Error</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/table_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Root Tracking Error</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/cylinder_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Robot Overheating</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Page template borrowed from  <a rel="Nerfies" href="https://nerfies.github.io/"> Nerfies </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
