@@ -126,7 +126,144 @@
   <div class="container is-max-fullhd">
     <h2 class="title is-3">Experiments</h2>
 
-    <!-- Simulation -->
+    
+
+    <!-- Real-World -->
+    <h3 class="title is-4" style="margin-top: 3rem;">Real-World Experiments</h3>
+    <div class="content has-text-justified">
+      <p>
+        Real-world experiments on the Unitree G1 humanoid robot, including interaction with diverse objects,
+        generalization to out-of-distribution object positions, and representative failure cases.
+      </p>
+    </div>
+
+    <h4 class="title is-5" style="margin-top: 1.5rem;">Interaction with Different Objects</h4>
+    <div class="content has-text-justified">
+      <p>
+        Demonstrations of box grasping, asymmetric bimanual chair carrying, table lifting from below,
+        and cylindrical-object enveloping.
+      </p>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/box_grasping.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Box Grasping</p>
+      </div>
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/chair_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Asymmetric Bimanual Chair Carrying</p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/table_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Table Lifting from Below</p>
+      </div>
+      <div class="column is-6">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/cylinder_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Cylindrical-Object Enveloping</p>
+      </div>
+    </div>
+
+    <h4 class="title is-5" style="margin-top: 2rem;">OOD Object Positions</h4>
+    <div class="content has-text-justified">
+      <p>
+        Continuous box grasping at varying object positions using a single reference trajectory,
+        demonstrating generalization to out-of-distribution robot-object relative poses.
+      </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/continuous_box.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Continuous Box Grasping under OOD Positions</p>
+      </div>
+    </div>
+
+    <h4 class="title is-5" style="margin-top: 2rem;">Failure Cases</h4>
+    <div class="content has-text-justified">
+      <p>
+        Representative failure cases from generated videos and real-world experiments.
+      </p>
+    </div>
+
+    <h5 class="title is-6 failure-subtitle">Generated Video Failures</h5>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/box.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Camera Viewpoint Drift</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/chair.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Object Morphology Hallucination</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/cylinder.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Unexpected Object Motion</p>
+      </div>
+    </div>
+
+    <h5 class="title is-6 failure-subtitle">Real-World Experiment Failures</h5>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/box_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Hand Contact Error</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/table_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Root Tracking Error</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/real/cylinder_fail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Robot Overheating</p>
+      </div>
+    </div>
+  <!-- Simulation -->
     <h3 class="title is-4">Simulation</h3>
     <div class="content has-text-justified">
       <p>
@@ -342,142 +479,6 @@
         </div>
       </div>
     </div>
-    </div>
-
-    <!-- Real-World -->
-    <h3 class="title is-4" style="margin-top: 3rem;">Real-World Experiments</h3>
-    <div class="content has-text-justified">
-      <p>
-        Real-world experiments on the Unitree G1 humanoid robot, including interaction with diverse objects,
-        generalization to out-of-distribution object positions, and representative failure cases.
-      </p>
-    </div>
-
-    <h4 class="title is-5" style="margin-top: 1.5rem;">Interaction with Different Objects</h4>
-    <div class="content has-text-justified">
-      <p>
-        Demonstrations of box grasping, asymmetric bimanual chair carrying, table lifting from below,
-        and cylindrical-object enveloping.
-      </p>
-    </div>
-
-    <div class="columns is-centered">
-      <div class="column is-6">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/box_grasping.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Box Grasping</p>
-      </div>
-      <div class="column is-6">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/chair_1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Asymmetric Bimanual Chair Carrying</p>
-      </div>
-    </div>
-
-    <div class="columns is-centered">
-      <div class="column is-6">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/table_1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Table Lifting from Below</p>
-      </div>
-      <div class="column is-6">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/cylinder_1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Cylindrical-Object Enveloping</p>
-      </div>
-    </div>
-
-    <h4 class="title is-5" style="margin-top: 2rem;">OOD Object Positions</h4>
-    <div class="content has-text-justified">
-      <p>
-        Continuous box grasping at varying object positions using a single reference trajectory,
-        demonstrating generalization to out-of-distribution robot-object relative poses.
-      </p>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-10">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/continuous_box.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Continuous Box Grasping under OOD Positions</p>
-      </div>
-    </div>
-
-    <h4 class="title is-5" style="margin-top: 2rem;">Failure Cases</h4>
-    <div class="content has-text-justified">
-      <p>
-        Representative failure cases from generated videos and real-world experiments.
-      </p>
-    </div>
-
-    <h5 class="title is-6 failure-subtitle">Generated Video Failures</h5>
-    <div class="columns is-centered">
-      <div class="column is-4">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/simulation/box.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Camera Viewpoint Drift</p>
-      </div>
-      <div class="column is-4">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/simulation/chair.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Object Morphology Hallucination</p>
-      </div>
-      <div class="column is-4">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/simulation/cylinder.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Unexpected Object Motion</p>
-      </div>
-    </div>
-
-    <h5 class="title is-6 failure-subtitle">Real-World Experiment Failures</h5>
-    <div class="columns is-centered">
-      <div class="column is-4">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/box_fail.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Hand Contact Error</p>
-      </div>
-      <div class="column is-4">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/table_fail.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Root Tracking Error</p>
-      </div>
-      <div class="column is-4">
-        <div class="video-grid-cell">
-          <video autoplay controls muted loop playsinline>
-            <source src="./static/videos/real/cylinder_fail.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="video-grid-caption">Robot Overheating</p>
-      </div>
     </div>
 
   </div>
