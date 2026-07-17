@@ -60,6 +60,17 @@
               Anonymous Authors
             </span>
           </div>
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="https://anonymous.4open.science/r/Gen-HOI-CA67"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -409,9 +420,39 @@
     <h4 class="title is-5" style="margin-top: 2rem;">Failure Cases</h4>
     <div class="content has-text-justified">
       <p>
-        Representative failure cases
+        Representative failure cases from generated videos and real-world experiments.
       </p>
     </div>
+
+    <h5 class="title is-6 failure-subtitle">Generated Video Failures</h5>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/box.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Camera Viewpoint Drift</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/chair.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Object Morphology Hallucination</p>
+      </div>
+      <div class="column is-4">
+        <div class="video-grid-cell">
+          <video autoplay controls muted loop playsinline>
+            <source src="./static/videos/simulation/cylinder.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="video-grid-caption">Unexpected Object Motion</p>
+      </div>
+    </div>
+
+    <h5 class="title is-6 failure-subtitle">Real-World Experiment Failures</h5>
     <div class="columns is-centered">
       <div class="column is-4">
         <div class="video-grid-cell">
